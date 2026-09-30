@@ -1,0 +1,1046 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SoleMate | Premium Sneakers</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        👟 SoleMate
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+
+        <li>
+            <a href="#wishlist">
+                ❤️ <span id="wishlist-count">0</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="#cart">
+                🛒 <span id="cart-count">0</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="nav-actions">
+
+        <button class="theme-btn" onclick="toggleDarkMode()">
+            🌙
+        </button>
+
+        <button
+            id="login-nav-btn"
+            class="login-btn"
+            onclick="openLogin()">
+            Login
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <span class="hero-tag">
+            NEW COLLECTION 2026
+        </span>
+
+        <h1>
+            Step Into <span>Style</span>
+        </h1>
+
+        <p>
+            Discover premium sneakers designed for comfort,
+            performance and everyday style.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#products" class="hero-btn">
+                Explore Collection
+            </a>
+
+            <button
+                class="outline-btn"
+                onclick="showFeatured()">
+                View Featured
+            </button>
+
+        </div>
+
+        <div class="hero-stats">
+
+            <div>
+                <strong>20+</strong>
+                <small>Products</small>
+            </div>
+
+            <div>
+                <strong>10K+</strong>
+                <small>Customers</small>
+            </div>
+
+            <div>
+                <strong>4.8★</strong>
+                <small>Rating</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<section class="products-section" id="products">
+
+    <div class="section-title">
+
+        <span class="small-title">
+            OUR COLLECTION
+        </span>
+
+        <h2>Find Your Perfect Pair</h2>
+
+        <p>
+            Sneakers for running, sports, casual wear and premium occasions.
+        </p>
+
+    </div>
+
+
+    <!-- SEARCH + SORT -->
+
+    <div class="shop-controls">
+
+        <input
+            type="text"
+            id="search"
+            class="search-box"
+            placeholder="🔍 Search sneakers..."
+        >
+
+        <select id="sortProducts" onchange="sortProducts()">
+
+            <option value="default">
+                Sort Products
+            </option>
+
+            <option value="low">
+                Price: Low to High
+            </option>
+
+            <option value="high">
+                Price: High to Low
+            </option>
+
+            <option value="rating">
+                Highest Rating
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- FILTERS -->
+
+    <div class="filters">
+
+        <button onclick="filterProducts('all')">
+            All
+        </button>
+
+        <button onclick="filterProducts('Running')">
+            🏃 Running
+        </button>
+
+        <button onclick="filterProducts('Casual')">
+            👟 Casual
+        </button>
+
+        <button onclick="filterProducts('Sports')">
+            ⚽ Sports
+        </button>
+
+        <button onclick="filterProducts('Premium')">
+            👑 Premium
+        </button>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    <div class="product-grid" id="product-grid">
+
+
+        <!-- PRODUCT 1 -->
+
+        <div class="product-card"
+             data-category="Running"
+             data-name="Speed Runner"
+             data-price="2999"
+             data-rating="4.8">
+
+            <div class="product-image">
+
+                <span class="badge">
+                    SALE
+                </span>
+
+                <button
+                    class="heart-btn"
+                    onclick="toggleWishlist(this, 'Speed Runner')">
+                    ♡
+                </button>
+
+                <img
+                    src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80"
+                    alt="Speed Runner">
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category">
+                    Running
+                </p>
+
+                <h3>Speed Runner</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐ <span>4.8</span>
+                </div>
+
+                <p class="price">
+                    ₹2,999
+                    <del>₹3,499</del>
+                </p>
+
+                <button
+                    class="cart-btn"
+                    onclick="addToCart('Speed Runner', 2999)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+
+        <div class="product-card"
+             data-category="Casual"
+             data-name="Urban Classic"
+             data-price="2499"
+             data-rating="4.6">
+
+            <div class="product-image">
+
+                <span class="badge new">
+                    NEW
+                </span>
+
+                <button
+                    class="heart-btn"
+                    onclick="toggleWishlist(this, 'Urban Classic')">
+                    ♡
+                </button>
+
+                <img
+                    src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=700&q=80"
+                    alt="Urban Classic">
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category">Casual</p>
+
+                <h3>Urban Classic</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐ <span>4.6</span>
+                </div>
+
+                <p class="price">
+                    ₹2,499
+                </p>
+
+                <button
+                    class="cart-btn"
+                    onclick="addToCart('Urban Classic', 2499)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+
+        <div class="product-card"
+             data-category="Sports"
+             data-name="Sport Pro"
+             data-price="3499"
+             data-rating="4.9">
+
+            <div class="product-image">
+
+                <span class="badge">
+                    HOT
+                </span>
+
+                <button
+                    class="heart-btn"
+                    onclick="toggleWishlist(this, 'Sport Pro')">
+                    ♡
+                </button>
+
+                <img
+                    src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=700&q=80"
+                    alt="Sport Pro">
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category">Sports</p>
+
+                <h3>Sport Pro</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐ <span>4.9</span>
+                </div>
+
+                <p class="price">
+                    ₹3,499
+                </p>
+
+                <button
+                    class="cart-btn"
+                    onclick="addToCart('Sport Pro', 3499)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 4 -->
+
+        <div class="product-card"
+             data-category="Premium"
+             data-name="Elite X"
+             data-price="5999"
+             data-rating="4.9">
+
+            <div class="product-image">
+
+                <span class="badge premium">
+                    PREMIUM
+                </span>
+
+                <button
+                    class="heart-btn"
+                    onclick="toggleWishlist(this, 'Elite X')">
+                    ♡
+                </button>
+
+                <img
+                    src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=700&q=80"
+                    alt="Elite X">
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category">Premium</p>
+
+                <h3>Elite X</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐ <span>4.9</span>
+                </div>
+
+                <p class="price">
+                    ₹5,999
+                </p>
+
+                <button
+                    class="cart-btn"
+                    onclick="addToCart('Elite X', 5999)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 5 -->
+
+        <div class="product-card"
+             data-category="Running"
+             data-name="Air Sprint"
+             data-price="3199"
+             data-rating="4.7">
+
+            <div class="product-image">
+
+                <span class="badge new">
+                    NEW
+                </span>
+
+                <button
+                    class="heart-btn"
+                    onclick="toggleWishlist(this, 'Air Sprint')">
+                    ♡
+                </button>
+
+                <img
+                    src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=700&q=80"
+                    alt="Air Sprint">
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category">Running</p>
+
+                <h3>Air Sprint</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐ <span>4.7</span>
+                </div>
+
+                <p class="price">
+                    ₹3,199
+                </p>
+
+                <button
+                    class="cart-btn"
+                    onclick="addToCart('Air Sprint', 3199)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 6 -->
+
+        <div class="product-card"
+             data-category="Casual"
+             data-name="Street Flex"
+             data-price="2799"
+             data-rating="4.5">
+
+            <div class="product-image">
+
+                <button
+                    class="heart-btn"
+                    onclick="toggleWishlist(this, 'Street Flex')">
+                    ♡
+                </button>
+
+                <img
+                    src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=700&q=80"
+                    alt="Street Flex">
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category">Casual</p>
+
+                <h3>Street Flex</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐ <span>4.5</span>
+                </div>
+
+                <p class="price">
+                    ₹2,799
+                </p>
+
+                <button
+                    class="cart-btn"
+                    onclick="addToCart('Street Flex', 2799)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 7 -->
+
+        <div class="product-card"
+             data-category="Sports"
+             data-name="Power Play"
+             data-price="3799"
+             data-rating="4.7">
+
+            <div class="product-image">
+
+                <span class="badge">
+                    HOT
+                </span>
+
+                <button
+                    class="heart-btn"
+                    onclick="toggleWishlist(this, 'Power Play')">
+                    ♡
+                </button>
+
+                <img
+                    src="https://images.unsplash.com/photo-1518002171953-a080ee817e1f?auto=format&fit=crop&w=700&q=80"
+                    alt="Power Play">
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category">Sports</p>
+
+                <h3>Power Play</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐ <span>4.7</span>
+                </div>
+
+                <p class="price">
+                    ₹3,799
+                </p>
+
+                <button
+                    class="cart-btn"
+                    onclick="addToCart('Power Play', 3799)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 8 -->
+
+        <div class="product-card"
+             data-category="Premium"
+             data-name="Royal Step"
+             data-price="6499"
+             data-rating="4.8">
+
+            <div class="product-image">
+
+                <span class="badge premium">
+                    PREMIUM
+                </span>
+
+                <button
+                    class="heart-btn"
+                    onclick="toggleWishlist(this, 'Royal Step')">
+                    ♡
+                </button>
+
+                <img
+                    src="https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=700&q=80"
+                    alt="Royal Step">
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category">Premium</p>
+
+                <h3>Royal Step</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐ <span>4.8</span>
+                </div>
+
+                <p class="price">
+                    ₹6,499
+                </p>
+
+                <button
+                    class="cart-btn"
+                    onclick="addToCart('Royal Step', 6499)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 9 -->
+
+        <div class="product-card"
+             data-category="Running"
+             data-name="Velocity Max"
+             data-price="4299"
+             data-rating="4.8">
+
+            <div class="product-image">
+
+                <span class="badge new">
+                    NEW
+                </span>
+
+                <button
+                    class="heart-btn"
+                    onclick="toggleWishlist(this, 'Velocity Max')">
+                    ♡
+                </button>
+
+                <img
+                    src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=700&q=80"
+                    alt="Velocity Max">
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category">Running</p>
+
+                <h3>Velocity Max</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐ <span>4.8</span>
+                </div>
+
+                <p class="price">
+                    ₹4,299
+                </p>
+
+                <button
+                    class="cart-btn"
+                    onclick="addToCart('Velocity Max', 4299)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 10 -->
+
+        <div class="product-card"
+             data-category="Casual"
+             data-name="Daily Move"
+             data-price="2199"
+             data-rating="4.4">
+
+            <div class="product-image">
+
+                <button
+                    class="heart-btn"
+                    onclick="toggleWishlist(this, 'Daily Move')">
+                    ♡
+                </button>
+
+                <img
+                    src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=700&q=80"
+                    alt="Daily Move">
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category">Casual</p>
+
+                <h3>Daily Move</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐ <span>4.4</span>
+                </div>
+
+                <p class="price">
+                    ₹2,199
+                </p>
+
+                <button
+                    class="cart-btn"
+                    onclick="addToCart('Daily Move', 2199)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 11 -->
+
+        <div class="product-card"
+             data-category="Sports"
+             data-name="Force One"
+             data-price="4499"
+             data-rating="4.9">
+
+            <div class="product-image">
+
+                <span class="badge">
+                    HOT
+                </span>
+
+                <button
+                    class="heart-btn"
+                    onclick="toggleWishlist(this, 'Force One')">
+                    ♡
+                </button>
+
+                <img
+                    src="https://images.unsplash.com/photo-1554139848-32f17d6e5d1f?auto=format&fit=crop&w=700&q=80"
+                    alt="Force One">
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category">Sports</p>
+
+                <h3>Force One</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐ <span>4.9</span>
+                </div>
+
+                <p class="price">
+                    ₹4,499
+                </p>
+
+                <button
+                    class="cart-btn"
+                    onclick="addToCart('Force One', 4499)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 12 -->
+
+        <div class="product-card"
+             data-category="Premium"
+             data-name="Titan Luxe"
+             data-price="7499"
+             data-rating="5.0">
+
+            <div class="product-image">
+
+                <span class="badge premium">
+                    PREMIUM
+                </span>
+
+                <button
+                    class="heart-btn"
+                    onclick="toggleWishlist(this, 'Titan Luxe')">
+                    ♡
+                </button>
+
+                <img
+                    src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=700&q=80"
+                    alt="Titan Luxe">
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category">Premium</p>
+
+                <h3>Titan Luxe</h3>
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐ <span>5.0</span>
+                </div>
+
+                <p class="price">
+                    ₹7,499
+                </p>
+
+                <button
+                    class="cart-btn"
+                    onclick="addToCart('Titan Luxe', 7499)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WISHLIST ================= -->
+
+<section class="wishlist-section" id="wishlist">
+
+    <div class="section-title">
+
+        <span class="small-title">
+            YOUR FAVORITES
+        </span>
+
+        <h2>❤️ Wishlist</h2>
+
+    </div>
+
+    <div id="wishlist-items" class="wishlist-items">
+
+        <p>
+            Your wishlist is empty.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CART ================= -->
+
+<section class="cart-section" id="cart">
+
+    <div class="section-title">
+
+        <span class="small-title">
+            YOUR SHOPPING BAG
+        </span>
+
+        <h2>🛒 Shopping Cart</h2>
+
+    </div>
+
+    <div id="cart-items">
+
+        <p class="empty-message">
+            Your cart is empty.
+        </p>
+
+    </div>
+
+    <div class="cart-summary">
+
+        <h3>
+            Total:
+            ₹<span id="cart-total">0</span>
+        </h3>
+
+        <button
+            class="checkout-btn"
+            onclick="checkout()">
+            Proceed to Checkout
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+    <div class="section-title">
+
+        <span class="small-title">
+            ABOUT US
+        </span>
+
+        <h2>Why Choose SoleMate?</h2>
+
+    </div>
+
+    <div class="features">
+
+        <div class="feature-card">
+            <div>🚚</div>
+            <h3>Free Delivery</h3>
+            <p>
+                Free delivery on orders above ₹999.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div>🔄</div>
+            <h3>Easy Returns</h3>
+            <p>
+                Simple 7-day return policy.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div>🔒</div>
+            <h3>Secure Shopping</h3>
+            <p>
+                Your shopping experience is secure.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div>⭐</div>
+            <h3>Quality Products</h3>
+            <p>
+                Carefully selected premium footwear.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="contact" id="contact">
+
+    <div class="section-title">
+
+        <span class="small-title">
+            GET IN TOUCH
+        </span>
+
+        <h2>Contact Us</h2>
+
+    </div>
+
+    <div class="contact-container">
+
+        <div>
+            <h3>📧 Email</h3>
+            <p>support@solemate.com</p>
+        </div>
+
+        <div>
+            <h3>📞 Phone</h3>
+            <p>+91 98765 43210</p>
+        </div>
+
+        <div>
+            <h3>📍 Location</h3>
+            <p>Ranchi, Jharkhand</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        👟 SoleMate
+    </div>
+
+    <p>
+        Premium sneakers for every step.
+    </p>
+
+    <p>
+        © 2026 SoleMate. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<!-- ================= LOGIN MODAL ================= -->
+
+<div class="modal" id="login-modal">
+
+    <div class="modal-box">
+
+        <button
+            class="close-btn"
+            onclick="closeLogin()">
+            ×
+        </button>
+
+        <div class="login-icon">
+            👤
+        </div>
+
+        <h2 id="login-title">
+            Welcome Back
+        </h2>
+
+        <p class="login-subtitle">
+            Login to your SoleMate account
+        </p>
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Enter your name">
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter your email">
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter password">
+
+        <button
+            class="login-submit"
+            onclick="loginUser()">
+            Login
+        </button>
+
+        <p class="demo-note">
+            Demo login — no real account is created.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="scripts.js"></script>
+
+</body>
+</html>
+```
