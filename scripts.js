@@ -183,27 +183,83 @@ function checkout() {
     }
 
 
-    let total = 0;
+    let total = cart.reduce(function(sum, item) {
+        return sum + item.price * item.quantity;
+    }, 0);
+    document.getElementById("checkout-total").textContent =
+        "₹" + total.toLocaleString("en-IN");
+    document.getElementById("checkout-modal").classList.add("show");
+    document.body.style.overflow = "hidden";
+    selectPaymentMethod();
+}
 
-    cart.forEach(function(item) {
+function closeCheckout() {
+    document.getElementById("checkout-modal").classList.remove("show");
+    document.body.style.overflow = "";
+}
 
-        total += item.price * item.quantity;
+function selectPaymentMethod() {
+    let method = document.querySelector('input[name="payment-method"]:checked');
+    let onlineNotice = document.getElementById("online-payment-box");
+    let placeButton = document.querySelector(".place-order-btn");
+    if (!method || !onlineNotice || !placeButton) return;
+    onlineNotice.classList.toggle("show", method.value === "ONLINE");
+    placeButton.textContent = method.value === "COD" ? "Place COD Order" : "Place Demo Order";
+}
 
-    });
+function placeOrder() {
+    let fields = [
+        ["checkout-name", "Please enter your full name."],
+        ["checkout-phone", "Please enter a valid 10-digit mobile number."],
+        ["checkout-address", "Please enter your delivery address."],
+        ["checkout-city", "Please enter your city."],
+        ["checkout-state", "Please enter your state."],
+        ["checkout-pincode", "Please enter a valid 6-digit PIN code."]
+    ];
+    for (let i = 0; i < fields.length; i++) {
+        let input = document.getElementById(fields[i][0]);
+        input.value = input.value.trim();
+        if (!input.value || (input.id === "checkout-phone" && !/^\d{10}$/.test(input.value)) ||
+            (input.id === "checkout-pincode" && !/^\d{6}$/.test(input.value))) {
+            input.focus();
+            alert(fields[i][1]);
+            return;
+        }
+    }
+    if (!cart.length) {
+        closeCheckout();
+        alert("Your cart is empty.");
+        return;
+    }
 
-
-    alert(
-        "🎉 Order placed successfully!\n\n" +
-        "Total Amount: ₹" +
-        total.toLocaleString("en-IN") +
-        "\n\nThank you for shopping with SoleMate!"
-    );
-
-
+    let method = document.querySelector('input[name="payment-method"]:checked').value;
+    let total = cart.reduce(function(sum, item) { return sum + item.price * item.quantity; }, 0);
+    let orders = JSON.parse(localStorage.getItem("solemateOrders") || "[]");
+    let order = {
+        id: "SM" + Date.now().toString().slice(-8),
+        date: new Date().toISOString(),
+        items: cart.map(function(item) { return { name: item.name, price: item.price, quantity: item.quantity }; }),
+        total: total,
+        paymentMethod: method,
+        paymentStatus: method === "COD" ? "Pay on delivery" : "Demo only — not charged",
+        customer: {
+            name: document.getElementById("checkout-name").value,
+            phone: document.getElementById("checkout-phone").value,
+            address: document.getElementById("checkout-address").value,
+            city: document.getElementById("checkout-city").value,
+            state: document.getElementById("checkout-state").value,
+            pincode: document.getElementById("checkout-pincode").value
+        }
+    };
+    orders.unshift(order);
+    localStorage.setItem("solemateOrders", JSON.stringify(orders));
     cart = [];
-
     saveCart();
     updateCart();
+    closeCheckout();
+    alert("Order confirmed!\n\nOrder ID: " + order.id + "\nPayment: " +
+        (method === "COD" ? "Cash on Delivery" : "Demo online payment (not charged)") +
+        "\nTotal: ₹" + total.toLocaleString("en-IN") + "\n\nThank you for shopping with SoleMate!");
 }
 
 
@@ -854,5 +910,17 @@ window.addEventListener(
 
         }
 
+        let checkoutModal = document.getElementById("checkout-modal");
+        if (checkoutModal && event.target === checkoutModal) {
+            closeCheckout();
+        }
+
     }
 );
+
+window.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeCheckout();
+        closeLogin();
+    }
+});

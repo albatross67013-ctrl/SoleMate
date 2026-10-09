@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +7,37 @@
     <title>SoleMate | Premium Sneakers</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Checkout modal styles -->
+    <style>
+        .checkout-modal { display:none; position:fixed; inset:0; z-index:10000; background:rgba(0,0,0,.65); padding:20px; overflow-y:auto; }
+        .checkout-modal.show { display:flex; align-items:flex-start; justify-content:center; }
+        .checkout-box { position:relative; width:100%; max-width:680px; margin:25px auto; padding:28px; border-radius:18px; background:var(--card-bg, #fff); color:var(--text-color, #222); box-shadow:0 15px 50px rgba(0,0,0,.25); }
+        .checkout-box h2 { margin:0 0 8px; }
+        .checkout-description { margin:0 0 22px; color:#777; }
+        .checkout-close { position:absolute; right:15px; top:10px; border:0; background:transparent; font-size:30px; cursor:pointer; }
+        .checkout-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+        .checkout-field { display:flex; flex-direction:column; gap:6px; }
+        .checkout-field.full { grid-column:1 / -1; }
+        .checkout-field label { font-weight:600; font-size:14px; }
+        .checkout-field input, .checkout-field textarea { width:100%; box-sizing:border-box; padding:12px; border:1px solid #d5d5d5; border-radius:9px; font:inherit; background:transparent; color:inherit; }
+        .checkout-field textarea { min-height:78px; resize:vertical; }
+        .payment-options { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px 0; }
+        .payment-option { display:flex; gap:9px; align-items:center; padding:14px; border:1px solid #d5d5d5; border-radius:10px; cursor:pointer; }
+        .payment-option:has(input:checked) { border-color:#5b4bdb; background:rgba(91,75,219,.08); }
+        .online-payment-box { display:none; padding:12px; border-radius:9px; background:#f3f3f3; color:#333; font-size:14px; }
+        .online-payment-box.show { display:block; }
+        .checkout-total { display:flex; justify-content:space-between; align-items:center; margin:20px 0; padding-top:15px; border-top:1px solid #ddd; font-size:18px; font-weight:700; }
+        .place-order-btn { width:100%; border:0; border-radius:10px; padding:14px; background:#171717; color:#fff; font-size:16px; font-weight:700; cursor:pointer; }
+        .place-order-btn:hover { opacity:.9; }
+        .checkout-note { margin:12px 0 0; color:#777; font-size:12px; text-align:center; }
+        body.dark .checkout-box { background:#242424; color:#eee; }
+        body.dark .checkout-field input, body.dark .checkout-field textarea { border-color:#555; }
+        body.dark .payment-option { border-color:#555; }
+        body.dark .online-payment-box { background:#333; color:#eee; }
+        @media (max-width:560px) { .checkout-box { padding:22px 16px; } .checkout-form-grid, .payment-options { grid-template-columns:1fr; } .checkout-field.full { grid-column:auto; } }
+    </style>
+
 </head>
 
 <body>
@@ -983,6 +1013,53 @@
 </footer>
 
 
+<!-- ================= CHECKOUT MODAL ================= -->
+<div class="checkout-modal" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+    <div class="checkout-box">
+        <button type="button" class="checkout-close" onclick="closeCheckout()" aria-label="Close checkout">&times;</button>
+        <h2 id="checkout-title">Complete Your Order</h2>
+        <p class="checkout-description">Enter your delivery details and choose a payment method.</p>
+
+        <div class="checkout-form-grid">
+            <div class="checkout-field">
+                <label for="checkout-name">Full name *</label>
+                <input id="checkout-name" type="text" autocomplete="name" placeholder="Your full name" required>
+            </div>
+            <div class="checkout-field">
+                <label for="checkout-phone">Mobile number *</label>
+                <input id="checkout-phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="10" placeholder="10-digit mobile number" required>
+            </div>
+            <div class="checkout-field full">
+                <label for="checkout-address">Full address *</label>
+                <textarea id="checkout-address" autocomplete="street-address" placeholder="House no., street, area, landmark" required></textarea>
+            </div>
+            <div class="checkout-field">
+                <label for="checkout-city">City *</label>
+                <input id="checkout-city" type="text" autocomplete="address-level2" placeholder="City" required>
+            </div>
+            <div class="checkout-field">
+                <label for="checkout-state">State *</label>
+                <input id="checkout-state" type="text" autocomplete="address-level1" placeholder="State" required>
+            </div>
+            <div class="checkout-field full">
+                <label for="checkout-pincode">PIN code *</label>
+                <input id="checkout-pincode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="6" placeholder="6-digit PIN code" required>
+            </div>
+        </div>
+
+        <h3 style="margin:22px 0 8px;">Choose payment method</h3>
+        <div class="payment-options">
+            <label class="payment-option"><input type="radio" name="payment-method" value="COD" checked onchange="selectPaymentMethod()"> <span>💵 Cash on Delivery</span></label>
+            <label class="payment-option"><input type="radio" name="payment-method" value="ONLINE" onchange="selectPaymentMethod()"> <span>💳 Online Payment</span></label>
+        </div>
+        <div class="online-payment-box" id="online-payment-box">Online payment is in demo mode. No money will be charged. To accept real payments, connect a payment gateway such as Razorpay or Stripe through a secure backend.</div>
+
+        <div class="checkout-total"><span>Order total</span><span id="checkout-total">₹0</span></div>
+        <button type="button" class="place-order-btn" onclick="placeOrder()">Place Order</button>
+        <p class="checkout-note">COD orders are confirmed for delivery. This demo stores order details in this browser only. Online payments are not processed.</p>
+    </div>
+</div>
+
 <!-- ================= LOGIN MODAL ================= -->
 
 <div class="modal" id="login-modal">
@@ -1043,4 +1120,3 @@
 
 </body>
 </html>
-```
