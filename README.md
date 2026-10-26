@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # SoleMate
 
 A responsive sneaker storefront built with plain HTML, CSS, and JavaScript.
@@ -13,3 +14,6 @@ Add products to the cart and choose **Proceed to Checkout**. Enter delivery deta
 =======
 # SoleMate
 >>>>>>> 4a1a5ca4cd963989a995fbca3b8c99e667190cc4
+=======
+# SoleMate2
+>>>>>>> 5b9403d8614576c4f24dbc5e759afe3b00b4ce57
